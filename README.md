@@ -20,7 +20,9 @@
 
 ## 配置
 
-使用遥控器的菜单键进入设置(手机上长按界面上半部分即可)，输入配置地址即可,例如: `https://tvbox-config.s3.bitiful.net/host/`
+使用遥控器的菜单键进入设置(手机上长按界面上半部分即可)，输入配置地址即可,例如: `https://tvplay-config.pharaoh.cf/`
+
+默认配置文件项目: <https://github.com/pharaoh2012/tvplay-config>，大家可以Fork项目后修改部署。
 
 在此地址下创建`config.txt`文件，里面放入频道地址，每行一个，第几行对应遥控器的1~9频道。
 
