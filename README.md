@@ -46,6 +46,7 @@ document.querySelector(".video_right").style.display = 'none'
 
 ## 安装方法
 
+- 下载软件: <https://github.com/pharaoh2012/tvplay/releases/>
 - 在电视上安装apk
 - 运行软件
 - 使用遥控器`菜单`按键，打开设置界面
