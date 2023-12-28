@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
                             Play();
                         }
                         else {
-                            toast("配置错误!",Toast.LENGTH_LONG);
+                            toast("获取频道错误!请检查网络是否正常!",Toast.LENGTH_LONG);
                             MainActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

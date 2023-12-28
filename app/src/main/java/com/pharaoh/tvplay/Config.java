@@ -27,7 +27,7 @@ public class Config {
 
     public Config(Context c) {
         this.context = c;
-        JS_HOST = getKey("JS_HOST","https://tvbox-config.pharaoh.cf/");
+        JS_HOST = getKey("JS_HOST","https://tvplay-config.pharaoh.cf/");
         currentCCTV = getInt("currentCCTV",1);
     }
 
