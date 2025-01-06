@@ -102,6 +102,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Http.init(this);
         //initGesture();
         config = new Config(this);
 
