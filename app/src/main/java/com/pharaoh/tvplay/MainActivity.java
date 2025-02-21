@@ -49,7 +49,16 @@ public class MainActivity extends Activity {
         MainActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mWebView.loadUrl(getUrl());
+                String url = getUrl();
+                String u1 = url;
+                String useragent = null;
+                if(url.contains("##")) {
+                    int index = url.indexOf("##"); // 获取第一个 # 的索引位置
+                    u1 = url.substring(0, index); // 第一部分：# 前的字符串
+                    useragent = url.substring(index + 2); // 第二部分：第一个 # 后的所有内容
+                }
+                mWebView.getSettings().setUserAgentString(useragent);
+                mWebView.loadUrl(u1);
             }
         });
     }
@@ -279,6 +288,16 @@ public class MainActivity extends Activity {
             }
 
             @JavascriptInterface
+            public void click(final float x,final float y) {
+                simulateClickAtCoordinate(mWebView,x,y,1000);
+            }
+
+            @JavascriptInterface
+            public void setUseragent(final String useragent) {
+                mWebView.getSettings().setUserAgentString(useragent);
+            }
+
+            @JavascriptInterface
             public void playM3u8(final String u,final String packName,final String className,final String type) {
                 Uri uri = Uri.parse(u);
                 Intent i = new Intent(Intent.ACTION_VIEW,uri);
@@ -397,6 +416,41 @@ public class MainActivity extends Activity {
                     }
                 });
         inputDialog.create().show();
+    }
+
+    public void simulateClickAtCoordinate(WebView webView, float x, float y,int sleepTime) {
+        long downTime = System.currentTimeMillis();
+        long eventTime = System.currentTimeMillis();
+        toast("click:"+x+","+y+" delay="+sleepTime);
+        // 创建按下事件 (ACTION_DOWN)
+        MotionEvent downEvent = MotionEvent.obtain(
+                downTime,
+                eventTime,
+                MotionEvent.ACTION_DOWN,
+                x,
+                y,
+                0
+        );
+
+        // 创建抬起事件 (ACTION_UP)
+        MotionEvent upEvent = MotionEvent.obtain(
+                downTime + sleepTime,
+                eventTime + sleepTime, // 稍微延迟以模拟真实点击
+                MotionEvent.ACTION_UP,
+                x,
+                y,
+                0
+        );
+
+        // 分发事件到 WebView
+        webView.dispatchTouchEvent(downEvent);
+        webView.dispatchTouchEvent(upEvent);
+
+
+
+        // 回收事件对象
+        downEvent.recycle();
+        upEvent.recycle();
     }
 
 }
